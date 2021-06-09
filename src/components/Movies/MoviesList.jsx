@@ -11,8 +11,9 @@ export default class MovieList extends Component {
         };
     }
 
-    componentDidMount() {
-        const {filters: {sort_by}} = this.props;
+    // сокращаем код с помощью getMovies
+    getMovies = filters => {
+        const {sort_by} = filters;
         const link = `${API_URL}/discover/movie/?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
         fetch(link)
             .then(res => res.json())
@@ -21,27 +22,32 @@ export default class MovieList extends Component {
                     movies: data.results
                 });
             });
+    }
+
+    componentDidMount() {
+        this.getMovies(this.props.filters);
     };
 
     componentDidUpdate(prevProps) {
         // console.log({props: this.props, prevProps});
-        if (prevProps.filters.sort_by !== this.props.filters.sort_by) {
-            const {filters: {sort_by}} = prevProps;
-            const link = `${API_URL}/discover/movie/?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
-            fetch(link)
-                .then(res => res.json())
-                .then(data => {
-                    this.setState({
-                        movies: data.results
-                    });
-                });
+        if (this.props.filters.sort_by !== prevProps.filters.sort_by) {
+            // const {filters: {sort_by}} = prevProps;
+            // const link = `${API_URL}/discover/movie/?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
+            // fetch(link)
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         this.setState({
+            //             movies: data.results
+            //         });
+            //     });
+            this.getMovies(this.props.filters);
         }
     }
 
-
     render() {
+
         const {movies} = this.state;
-        console.log('filters', this.props.filters);
+        // console.log('filters', this.props.filters);
         return (
             <div className="row">
                 {movies.map(movie => {
