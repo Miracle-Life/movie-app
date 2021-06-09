@@ -8,9 +8,12 @@ export default class App extends React.Component {
 
         this.state = {
             filters: {
-                sort_by: 'popularity.desc'
+                sort_by: "popularity.desc",
+                primary_release_year: "2021",
+                with_genres: []
             },
-            page: 1
+            page: 1,
+            total_pages: ""
         }
     }
 
@@ -23,21 +26,22 @@ export default class App extends React.Component {
             filters: {
                 ...prevState.filters,
                 [event.target.name]: event.target.value
-            }
+            },
+            page: 1
         }));
         // console.log(event.target.name, event.target.value);
     };
 
-    onChangePage = page => {
+    onChangePagination = ({page, total_pages = this.state.total_pages}) => {
         this.setState({
-            //es6 page:page
-            page
+            page,
+            total_pages
         });
     };
 
 
     render() {
-        const {filters, page} = this.state
+        const {filters, page, total_pages} = this.state;
         return (
             <div className="container">
                 <div className="row mt-4">
@@ -47,9 +51,10 @@ export default class App extends React.Component {
                                 <h3>Фильтры:</h3>
                                 <Filters
                                     page={page}
+                                    total_pages={total_pages}
                                     filters={filters}
                                     onChangeFilters={this.onChangeFilters}
-                                    onChangePage={this.onChangePage}
+                                    onChangePagination={this.onChangePagination}
                                 />
                             </div>
                         </div>
@@ -57,7 +62,7 @@ export default class App extends React.Component {
                     <div className="col-8">
                         <MoviesList
                             page={page}
-                            onChangePage={this.onChangePage}
+                            onChangePagination={this.onChangePagination}
                             filters={filters}/>
                     </div>
                 </div>
