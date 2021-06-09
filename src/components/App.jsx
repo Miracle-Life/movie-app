@@ -9,7 +9,8 @@ export default class App extends React.Component {
         this.state = {
             filters: {
                 sort_by: 'popularity.desc'
-            }
+            },
+            page: 1
         }
     }
 
@@ -18,7 +19,7 @@ export default class App extends React.Component {
         //     ...this.state.filters,
         //     [event.target.name]: event.target.value
         // };
-        this.setState(prevState=>({
+        this.setState(prevState => ({
             filters: {
                 ...prevState.filters,
                 [event.target.name]: event.target.value
@@ -27,8 +28,16 @@ export default class App extends React.Component {
         // console.log(event.target.name, event.target.value);
     };
 
+    onChangePage = page => {
+        this.setState({
+            //es6 page:page
+            page
+        });
+    };
+
+
     render() {
-        const {filters} = this.state
+        const {filters, page} = this.state
         return (
             <div className="container">
                 <div className="row mt-4">
@@ -36,12 +45,20 @@ export default class App extends React.Component {
                         <div className="card" style={{width: "100%"}}>
                             <div className="card-body">
                                 <h3>Фильтры:</h3>
-                                <Filters filters={filters} onChangeFilters={this.onChangeFilters}/>
+                                <Filters
+                                    page={page}
+                                    filters={filters}
+                                    onChangeFilters={this.onChangeFilters}
+                                    onChangePage={this.onChangePage}
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="col-8">
-                        <MoviesList filters={filters}/>
+                        <MoviesList
+                            page={page}
+                            onChangePage={this.onChangePage}
+                            filters={filters}/>
                     </div>
                 </div>
             </div>
