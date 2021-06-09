@@ -21,7 +21,23 @@ export default class MovieList extends Component {
                     movies: data.results
                 });
             });
+    };
+
+    componentDidUpdate(prevProps) {
+        // console.log({props: this.props, prevProps});
+        if (prevProps.filters.sort_by !== this.props.filters.sort_by) {
+            const {filters: {sort_by}} = prevProps;
+            const link = `${API_URL}/discover/movie/?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}`;
+            fetch(link)
+                .then(res => res.json())
+                .then(data => {
+                    this.setState({
+                        movies: data.results
+                    });
+                });
+        }
     }
+
 
     render() {
         const {movies} = this.state;
