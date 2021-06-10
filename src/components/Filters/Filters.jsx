@@ -22,11 +22,15 @@ export default class Filters extends React.Component {
                     primary_release_year={primary_release_year}
                     onChangeFilters={onChangeFilters}
                 />
-                <Genres with_genres={with_genres} onChangeFilters={onChangeFilters}/>
                 <Pagination
                     page={page}
                     total_pages={total_pages}
                     onChangePagination={onChangePagination}
+                />
+
+                <Genres
+                    with_genres={with_genres}
+                    onChangeFilters={onChangeFilters}
                 />
             </form>
         );

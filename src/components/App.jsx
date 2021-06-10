@@ -3,9 +3,8 @@ import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
 
 export default class App extends React.Component {
-    constructor() {
-        super();
-
+    constructor(props) {
+        super(props);
         this.state = {
             filters: {
                 sort_by: "popularity.desc",
@@ -18,14 +17,11 @@ export default class App extends React.Component {
     }
 
     onChangeFilters = (event) => {
-        // const newFilters={
-        //     ...this.state.filters,
-        //     [event.target.name]: event.target.value
-        // };
+        const {name,value}=event.target
         this.setState(prevState => ({
             filters: {
                 ...prevState.filters,
-                [event.target.name]: event.target.value
+                [name]: value
             },
             page: 1
         }));

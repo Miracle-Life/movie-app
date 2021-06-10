@@ -5,8 +5,8 @@ import _ from "lodash";
 import queryString from "query-string";
 
 export default class MovieList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             movies: []
@@ -60,18 +60,9 @@ export default class MovieList extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        // console.log({props: this.props, prevProps});
-        // console.log('componentDidUpdate', prevProps.page, this.props.page)
-        // if (this.props.filters.sort_by !== prevProps.filters.sort_by) {
-        //     this.props.onChangePage(1);
-        //     this.getMovies(this.props.filters, 1);
-        // }
+
         if (
             !_.isEqual(this.props.filters, prevProps.filters)
-            // this.props.filters !== prevProps.filters
-            // this.props.filters.sort_by !== prevProps.filters.sort_by ||
-            // this.props.filters.primary_release_year !==
-            //   prevProps.filters.primary_release_year
         ) {
             this.props.onChangePagination({page: 1});
             this.getMovies(this.props.filters, 1);
