@@ -19,7 +19,7 @@
     "stylus": "^0.54.8",
     "autoprefixer-stylus": "^1.0.0",
     "firebase": "^8.6.2",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.6.2",
     "re-base": "^4.0.0"
   },
   "scripts": {
@@ -41,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.3"
+    "@babel/cli": "^7.14.5"
   }
 }

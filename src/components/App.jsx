@@ -17,7 +17,7 @@ export default class App extends React.Component {
     }
 
     onChangeFilters = (event) => {
-        const {name,value}=event.target
+        const {name, value} = event.target
         this.setState(prevState => ({
             filters: {
                 ...prevState.filters,

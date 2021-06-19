@@ -1,6 +1,6 @@
 import React from "react";
 import MovieItem from "./MovieItem";
-import {API_URL, API_KEY_3} from "../../api/api";
+import {API_KEY_3, API_URL} from "../../api/api";
 import _ from "lodash";
 import queryString from "query-string";
 
