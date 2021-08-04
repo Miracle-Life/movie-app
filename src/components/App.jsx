@@ -59,7 +59,8 @@ export default class App extends React.Component {
                         <MoviesList
                             page={page}
                             onChangePagination={this.onChangePagination}
-                            filters={filters}/>
+                            filters={filters}
+                        />
                     </div>
                 </div>
             </div>
